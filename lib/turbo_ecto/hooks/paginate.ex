@@ -102,7 +102,6 @@ defmodule Turbo.Ecto.Hooks.Paginate do
   end
 
   defp get_count(query, repo) do
-    repo
-    |> apply(:aggregate, [query, :count, :id])
+    repo.one(from i in query, select: count("*"))
   end
 end
